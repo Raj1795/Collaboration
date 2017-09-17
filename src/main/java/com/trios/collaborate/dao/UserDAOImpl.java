@@ -7,26 +7,26 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import org.springframework.transaction.annotation.Transactional;
 
 
-import com.trios.collaborate.model.Forum;
+import com.trios.collaborate.model.User;
 
-@Repository("forumDAO")
-public class ForumDAOImpl implements ForumDAO {
-
+@Repository("userDAO")
+public class UserDAOImpl implements UserDAO
+{
+	
 	@Autowired
 	SessionFactory sessionFactory;
-
-	public ForumDAOImpl(SessionFactory sessionFactory) {
+	
+	public UserDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Transactional
-	public boolean createForum(Forum forum) {
+	public boolean createUser(User user) {
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(forum);
+			sessionFactory.getCurrentSession().saveOrUpdate(user);
 			return true;
 		} catch (Exception e) {
 			System.out.println("Exception Arised:" + e);
@@ -34,26 +34,28 @@ public class ForumDAOImpl implements ForumDAO {
 		return false;
 	}
 
-	public Forum getForum(int forumId) {
+	public User getUser(int userId) {
 		Session session = sessionFactory.openSession();
-		Forum forum = (Forum) session.get(Forum.class, forumId);
+		User user = (User) session.get(User.class, userId);
 		session.close();
-		return forum;
+		return user;
 		
 	}
 
-	public List<Forum> getForums() {
+	public List<User> getUsers() {
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from Forum where status='A'");
-		List<Forum> listForum = query.list();
+		Query query = session.createQuery("From Blog where status='A'");
+		List<User> listUser = query.list();
 		session.close();
-		return listForum;
+		return listUser;
+		
 	}
 
-	public boolean approveForum(Forum forum) {
+	@Transactional
+	public boolean approveUser(User user) {
 		try {
-			forum.setStatus("A");
-			sessionFactory.getCurrentSession().saveOrUpdate(forum);
+			user.setStatus("A");
+			sessionFactory.getCurrentSession().saveOrUpdate(user);
 			return true;
 		} catch (Exception e) {
 			System.out.println("Exception Arised:" + e);
@@ -61,16 +63,16 @@ public class ForumDAOImpl implements ForumDAO {
 		return false;
 	}
 
-	public boolean editForum(int forumId) {
-		// TODO Auto-generated method stub
+	public boolean editUser(int userId) {
+		
 		return false;
 	}
 
-	public boolean deleteForum(int forumId) {
+	public boolean deleteUser(int userId) {
 		try {
 			Session session = sessionFactory.openSession();
-			Forum forum = (Forum) session.get(Forum.class, forumId);
-			session.delete(forum);
+			User user = (User) session.get(User.class, userId);
+			session.delete(user);
 			session.flush();
 			session.close();
 			return true;

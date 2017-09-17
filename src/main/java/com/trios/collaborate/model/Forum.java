@@ -8,7 +8,9 @@ import javax.persistence.*;
 @Table
 public class Forum {
 
+	@Id
 	private int forumId;
+	
 	private String forumName,forumContent,status,userId;
 	public int getForumId() {
 		return forumId;

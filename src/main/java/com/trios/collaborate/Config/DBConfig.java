@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +19,11 @@ import com.trios.collaborate.dao.BlogDAO;
 import com.trios.collaborate.dao.BlogDAOImpl;
 import com.trios.collaborate.dao.ForumDAO;
 import com.trios.collaborate.dao.ForumDAOImpl;
+import com.trios.collaborate.dao.UserDAO;
+import com.trios.collaborate.dao.UserDAOImpl;
 import com.trios.collaborate.model.Blog;
 import com.trios.collaborate.model.Forum;
+import com.trios.collaborate.model.User;
 
 @Configuration
 @ComponentScan("com.trios.collaborate")
@@ -50,7 +54,8 @@ public class DBConfig {
 		LocalSessionFactoryBuilder localSessionFactoryBuilder=new LocalSessionFactoryBuilder(getOracleDataSource());
 		localSessionFactoryBuilder.addProperties(getHibernateProperties());
 		localSessionFactoryBuilder.addAnnotatedClass(Blog.class);
-		//localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
+		localSessionFactoryBuilder.addAnnotatedClass(User.class);
 		System.out.println("SessionFactory Bean Created");
 		return localSessionFactoryBuilder.buildSessionFactory();
 	}
@@ -64,9 +69,15 @@ public class DBConfig {
 	{
 		return new BlogDAOImpl(sessionFactory);
 	}
+	
 	@Bean
 	public ForumDAO getForumDAO(SessionFactory sessionFactory)
 	{
 		return new ForumDAOImpl(sessionFactory);
+	}
+	@Bean
+	public UserDAO getUserDAO(SessionFactory sessionFactory)
+	{
+		return new UserDAOImpl(sessionFactory);
 	}
 }

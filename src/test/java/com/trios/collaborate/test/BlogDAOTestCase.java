@@ -2,6 +2,7 @@ package com.trios.collaborate.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -56,13 +57,20 @@ public class BlogDAOTestCase {
 		blog.setLikes(0);
 		assertTrue("Problem in Approving Blog",blogDAO.approveBlog(blog));
 	}
+	
+	@Ignore
 	@Test
-	public void editBlogTest()
+	public void getBlogsTest()
 	{
-          Blog blog =new Blog();
-          blog.setBlogId(10);
-          blog.setBlogName("Wall climber");
-          blog.setBlogContent("Advance technology");
+         List<Blog> listBlog=blogDAO.getBlogs();
+         assertTrue("No Approved Blogs",listBlog.size()>0);
 	}
-
+	
+	@Ignore
+	@Test
+	public void deleteBlogTest()
+	{
+		assertTrue("Problem in deleting",blogDAO.deleteBlog(10));
+	}
+	
 }
