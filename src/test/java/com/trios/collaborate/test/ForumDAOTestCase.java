@@ -28,7 +28,7 @@ public class ForumDAOTestCase {
 		annotationConfigAppContext.refresh();
 		forumDAO=(ForumDAO)annotationConfigAppContext.getBean("forumDAO");
 	}
-	@Ignore
+	
 	@Test
 	public void createForumTest() {
 		Forum forum=new Forum();
@@ -61,6 +61,7 @@ public class ForumDAOTestCase {
 	{
 		assertTrue("Problem in deleting",forumDAO.deleteForum(10));
 	}
+	@Ignore
 	@Test
 	public void getForumsTest()
 	{

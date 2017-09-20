@@ -44,7 +44,7 @@ public class BlogDAOTestCase {
 		assertTrue("Problem in creating Blog",blogDAO.createBlog(blog));
 	}
 
-	
+	@Ignore
 	@Test
 	public void approveBlogTest() {
 		Blog blog=new Blog();
@@ -71,6 +71,10 @@ public class BlogDAOTestCase {
 	public void deleteBlogTest()
 	{
 		assertTrue("Problem in deleting",blogDAO.deleteBlog(10));
+	}
+	@Test
+	public void getBlogTest(){
+		assertNotNull("problem in getting blog",blogDAO.getBlog(10));
 	}
 	
 }

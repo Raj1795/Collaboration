@@ -8,7 +8,9 @@ public class User {
 
 	@Id
 	private String userId;
+	
 	private String firstName,lastName,email,password,role,status,isOnline;
+	
 	public String getUserId() {
 		return userId;
 	}

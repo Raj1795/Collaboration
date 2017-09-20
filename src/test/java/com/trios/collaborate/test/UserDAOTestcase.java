@@ -26,7 +26,7 @@ public class UserDAOTestcase {
 		annotationConfigAppContext.refresh();
 		userDAO=(UserDAO)annotationConfigAppContext.getBean("userDAO");
 	}
-	@Ignore
+	
 	@Test
 	public void createUserTest(){
 		User user =new User();
@@ -40,16 +40,17 @@ public class UserDAOTestcase {
 		user.setUserId("ranjith@gmail.com");
 		assertTrue("Problem in Creating User",userDAO.createUser(user));
 	}
-	
+	@Ignore
 	@Test
-	public void approveUserTest(){
+	public void approveUserTest()
+	{
 		User user =new User();
-		user.setFirstName("Ranjith");
+		user.setFirstName("Naveen");
 		user.setLastName("Raju");
 		user.setEmail("ranjith@gmail.com");
 		user.setIsOnline("Online");
-		user.setPassword("trios");
-		user.setRole("Admin");
+		user.setPassword("trios123");
+		user.setRole("user");
 		user.setStatus("NA");
 		user.setUserId("naveen@gmail.com");
 		assertTrue("Problem in Approving User",userDAO.approveUser(user));
