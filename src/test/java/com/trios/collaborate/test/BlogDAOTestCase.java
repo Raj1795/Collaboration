@@ -30,7 +30,7 @@ public class BlogDAOTestCase {
 		annotationConfigAppContext.refresh();
 		blogDAO=(BlogDAO)annotationConfigAppContext.getBean("blogDAO");
 	}
-	@Ignore
+	
 	@Test
 	public void createBlogTest() {
 		Blog blog=new Blog();
@@ -72,6 +72,7 @@ public class BlogDAOTestCase {
 	{
 		assertTrue("Problem in deleting",blogDAO.deleteBlog(10));
 	}
+	@Ignore
 	@Test
 	public void getBlogTest(){
 		assertNotNull("problem in getting blog",blogDAO.getBlog(10));

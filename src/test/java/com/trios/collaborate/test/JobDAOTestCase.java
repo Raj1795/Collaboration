@@ -30,7 +30,7 @@ public class JobDAOTestCase {
 		jobDAO=(JobDAO)annotationConfigAppContext.getBean("jobDAO");
 	}
 	
-	@Ignore
+	
 	@Test
 	public void createJobTest() {
 		Job job=new Job();
@@ -63,7 +63,7 @@ public class JobDAOTestCase {
          assertTrue("No Approved Blogs",listJob.size()>0);
 	}
 	
-	
+	@Ignore
 	@Test
 	public void deleteJobTest()
 	{

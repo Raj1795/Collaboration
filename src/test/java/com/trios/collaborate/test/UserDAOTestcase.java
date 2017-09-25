@@ -1,5 +1,6 @@
 package com.trios.collaborate.test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 
 import com.trios.collaborate.dao.UserDAO;
-import com.trios.collaborate.model.Blog;
+
 import com.trios.collaborate.model.User;
 
 
@@ -32,7 +33,7 @@ public class UserDAOTestcase {
 		User user =new User();
 		user.setFirstName("Ranjith");
 		user.setLastName("Raju");
-		user.setEmail("ranjith@gmail.com");
+		user.setEmail("naveen.6594@gmail.com");
 		user.setIsOnline("Online");
 		user.setPassword("trios");
 		user.setRole("Admin");
@@ -55,11 +56,23 @@ public class UserDAOTestcase {
 		user.setUserId("naveen@gmail.com");
 		assertTrue("Problem in Approving User",userDAO.approveUser(user));
 	}
+	
 	@Ignore
 	@Test
 	public void getUsersTest()
 	{
          List<User> listUser=userDAO.getUsers();
          assertTrue("No Approved Users",listUser.size()>0);
+	}
+	@Ignore
+	@Test
+	public void getUserTest(){
+		assertNotNull("problem in getting user",userDAO.getUser("ranjith@gmail.com"));
+	}
+	@Ignore
+	@Test
+	public void deleteBlogTest()
+	{
+		assertTrue("Problem in deleting",userDAO.deleteUser("ranjith@gmail.com"));
 	}
 }

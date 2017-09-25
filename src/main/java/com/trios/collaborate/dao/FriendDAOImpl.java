@@ -43,7 +43,7 @@ public class FriendDAOImpl implements FriendDAO {
 
 	public List<Friend> getFriends() {
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("From Blog where status='A'");
+		Query query = session.createQuery("From Friend where status='A'");
 		List<Friend> listFriend = query.list();
 		session.close();
 		return listFriend;

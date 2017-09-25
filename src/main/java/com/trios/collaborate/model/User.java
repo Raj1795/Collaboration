@@ -3,13 +3,16 @@ package com.trios.collaborate.model;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name="User_trios")
 public class User {
 
 	@Id
 	private String userId;
 	
-	private String firstName,lastName,email,password,role,status,isOnline;
+	private String firstName,lastName,password,role,status,isOnline;
+	
+	@Column(unique=true,nullable=false)
+	private String email;
 	
 	public String getUserId() {
 		return userId;
