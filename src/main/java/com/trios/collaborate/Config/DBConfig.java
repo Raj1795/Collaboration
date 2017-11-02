@@ -23,12 +23,16 @@ import com.trios.collaborate.dao.FriendDAO;
 import com.trios.collaborate.dao.FriendDAOImpl;
 import com.trios.collaborate.dao.JobDAO;
 import com.trios.collaborate.dao.JobDAOImpl;
+import com.trios.collaborate.dao.ProfilePictureDAO;
+import com.trios.collaborate.dao.ProfilePictureDAOImpl;
 import com.trios.collaborate.dao.UserDAO;
 import com.trios.collaborate.dao.UserDAOImpl;
 import com.trios.collaborate.model.Blog;
+import com.trios.collaborate.model.BlogComment;
 import com.trios.collaborate.model.Forum;
 import com.trios.collaborate.model.Friend;
 import com.trios.collaborate.model.Job;
+import com.trios.collaborate.model.ProfilePicture;
 import com.trios.collaborate.model.User;
 
 @Configuration
@@ -64,6 +68,8 @@ public class DBConfig {
 		localSessionFactoryBuilder.addAnnotatedClass(User.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Job.class);
+		localSessionFactoryBuilder.addAnnotatedClass(BlogComment.class);
+		localSessionFactoryBuilder.addAnnotatedClass(ProfilePicture.class);
 		System.out.println("SessionFactory Bean Created");
 		return localSessionFactoryBuilder.buildSessionFactory();
 	}
@@ -97,5 +103,10 @@ public class DBConfig {
 	public JobDAO getJobDAO(SessionFactory sessionFactory)
 	{
 		return new JobDAOImpl(sessionFactory);
+	}
+	@Bean
+	public ProfilePictureDAO getProfilePictureDAO(SessionFactory sessionFactory)
+	{
+		return new ProfilePictureDAOImpl(sessionFactory);
 	}
 }

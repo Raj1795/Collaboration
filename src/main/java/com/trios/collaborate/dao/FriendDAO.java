@@ -4,12 +4,15 @@ import java.util.List;
 
 
 import com.trios.collaborate.model.Friend;
+import com.trios.collaborate.model.User;
 
 public interface FriendDAO {
-	public boolean createFriend(Friend friend);
-	public Friend getFriend(int friendId);
-	public List<Friend> getFriends();
-	public boolean approveFriend(Friend friend);
-	public boolean editFriend(int friendId);
-	public boolean deleteFriend(int friendId);
+	
+	
+	public void friendRequest(Friend friend);
+	public List<User> getFriends(String userId);
+	public List<Friend>pendingRequest(String toId);
+	public void updateRequest(Friend friend);
+	
+	
 }

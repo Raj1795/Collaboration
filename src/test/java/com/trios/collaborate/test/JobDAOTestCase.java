@@ -35,24 +35,14 @@ public class JobDAOTestCase {
 	public void createJobTest() {
 		Job job=new Job();
 		job.setJobId(14);
-		job.setJobProfile("mct");
-		job.setJobDesc("Mechatronics");
-		job.setStatus("NA");
-		job.setQualification("B.E");
-		job.setPostDate(new java.util.Date());
-		assertTrue("Problem in creating Job",jobDAO.createJob(job));
+		
 	}
 	@Ignore
 	@Test
 	public void approveJobTest() {
 		Job job=new Job();
 		job.setJobId(14);
-		job.setJobProfile("mct");
-		job.setJobDesc("Mechatronics");
-		job.setStatus("NA");
-		job.setQualification("B.E");
-		job.setPostDate(new java.util.Date());
-		assertTrue("Problem in approving Job",jobDAO.approveJob(job));
+		
 	}
 	
 	@Ignore

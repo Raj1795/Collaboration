@@ -37,34 +37,14 @@ public class BlogDAOTestCase {
 		blog.setBlogId(10);
 		blog.setBlogName("VertiGo");
 		blog.setBlogContent("New Era of AeroDynamic");
-		blog.setUserId("ranjith@gmail.com");
-		blog.setCreateDate(new java.util.Date());
-		blog.setStatus("NA");
+		
 		blog.setLikes(0);
 		assertTrue("Problem in creating Blog",blogDAO.createBlog(blog));
 	}
 
-	@Ignore
-	@Test
-	public void approveBlogTest() {
-		Blog blog=new Blog();
-		blog.setBlogId(10);
-		blog.setBlogName("VertiGo");
-		blog.setBlogContent("New Era of AeroDynamic");
-		blog.setUserId("ranjith@gmail.com");
-		blog.setCreateDate(new java.util.Date());
-		blog.setStatus("NA");
-		blog.setLikes(0);
-		assertTrue("Problem in Approving Blog",blogDAO.approveBlog(blog));
-	}
 	
-	@Ignore
-	@Test
-	public void getBlogsTest()
-	{
-         List<Blog> listBlog=blogDAO.getBlogs();
-         assertTrue("No Approved Blogs",listBlog.size()>0);
-	}
+	
+	
 	
 	@Ignore
 	@Test

@@ -3,7 +3,7 @@ package com.trios.collaborate.test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
+
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -37,42 +37,16 @@ public class UserDAOTestcase {
 		user.setIsOnline("Online");
 		user.setPassword("trios");
 		user.setRole("Admin");
-		user.setStatus("NA");
+		
 		user.setUserId("ranjith@gmail.com");
 		assertTrue("Problem in Creating User",userDAO.createUser(user));
 	}
-	@Ignore
-	@Test
-	public void approveUserTest()
-	{
-		User user =new User();
-		user.setFirstName("Naveen");
-		user.setLastName("Raju");
-		user.setEmail("ranjith@gmail.com");
-		user.setIsOnline("Online");
-		user.setPassword("trios123");
-		user.setRole("user");
-		user.setStatus("NA");
-		user.setUserId("naveen@gmail.com");
-		assertTrue("Problem in Approving User",userDAO.approveUser(user));
-	}
 	
-	@Ignore
-	@Test
-	public void getUsersTest()
-	{
-         List<User> listUser=userDAO.getUsers();
-         assertTrue("No Approved Users",listUser.size()>0);
-	}
+	
 	@Ignore
 	@Test
 	public void getUserTest(){
 		assertNotNull("problem in getting user",userDAO.getUser("ranjith@gmail.com"));
 	}
-	@Ignore
-	@Test
-	public void deleteBlogTest()
-	{
-		assertTrue("Problem in deleting",userDAO.deleteUser("ranjith@gmail.com"));
-	}
+	
 }

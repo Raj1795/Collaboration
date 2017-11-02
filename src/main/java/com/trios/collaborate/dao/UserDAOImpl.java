@@ -1,6 +1,6 @@
 package com.trios.collaborate.dao;
 
-import java.util.List;
+
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -43,45 +43,13 @@ public class UserDAOImpl implements UserDAO
 		
 	}
 
-	public List<User> getUsers() {
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from user where status='A'");
-		List<User> listUser = query.list();
-		session.close();
-		return listUser;
-		
-	}
+	
 
 	
-	public boolean approveUser(User user) {
-		try {
-			user.setStatus("A");
-			sessionFactory.getCurrentSession().saveOrUpdate(user);
-			return true;
-		} catch (Exception e) {
-			System.out.println("Exception Arised:" + e);
-		}
-		return false;
-	}
+	
 
-	public boolean editUser(String userId) {
-		
-		return false;
-	}
-
-	public boolean deleteUser(String userId) {
-		try {
-			Session session = sessionFactory.openSession();
-			User user = (User) session.get(User.class, userId);
-			session.delete(user);
-			session.flush();
-			session.close();
-			return true;
-		} catch (Exception e) {
-			System.out.println("Exception Arised:" + e);
-		}
-		return false;
-	}
+	
+	
 
 	public boolean isUsernameValid(String userId) {
 		Session session=sessionFactory.getCurrentSession();
@@ -96,6 +64,36 @@ public class UserDAOImpl implements UserDAO
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from User where email=?");
 		query.setString(0,email);
+		User user=(User)query.uniqueResult();
+		if(user==null)
+			return true;
+		else
+		return false;
+	}
+
+
+	public User login(User user) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from User where userId=? and password=?");
+		query.setString(0,user.getUserId());
+		query.setString(1,user.getPassword());
+		user=(User)query.uniqueResult();
+		return user;
+	}
+
+
+	public void update(User user) {
+		Session session=sessionFactory.getCurrentSession();
+		session.update(user);
+		
+	}
+
+
+	public boolean isupdateEmailValid(String email, String userId) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from User where email=? and userId!=?");
+		query.setString(0,email);
+		query.setString(1,userId);
 		User user=(User)query.uniqueResult();
 		if(user==null)
 			return true;

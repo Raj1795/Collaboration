@@ -29,43 +29,7 @@ static FriendDAO friendDAO;
 		friendDAO=(FriendDAO)annotationConfigAppContext.getBean("friendDAO");
 	}
 	
-	@Ignore
-	@Test
-	public void createFriendTest() {
-		Friend friend=new Friend();
-		friend.setFriendId(7);
-		friend.setUserId("ranjith@gmail.com");
-		friend.setStatus("NA");
-		assertTrue("Problem in creating Friend",friendDAO.createFriend(friend));
-	}
-	@Ignore
-	@Test
-	public void approveFriendTest() {
-		Friend friend=new Friend();
-		friend.setFriendId(7);
-		friend.setUserId("ranjith@gmail.com");
-		friend.setStatus("NA");
-		assertTrue("Problem in Approving Friend",friendDAO.approveFriend(friend));
-	}
-	
-	@Ignore
-	@Test
-	public void getFriendsTest()
-	{
-         List<Friend> listFriend=friendDAO.getFriends();
-         assertTrue("No Approved Blogs",listFriend.size()>0);
-	}
 	
 	
-	@Test
-	public void deleteFriendTest()
-	{
-		assertTrue("Problem in deleting",friendDAO.deleteFriend(7));
-	}
-	@Ignore
-	@Test
-	public void getFriendTest(){
-		assertNotNull("problem in getting blog",friendDAO.getFriend(7));
-	}
 
 }

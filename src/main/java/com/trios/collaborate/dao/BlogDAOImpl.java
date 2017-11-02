@@ -5,15 +5,18 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.trios.collaborate.model.Blog;
+import com.trios.collaborate.model.BlogComment;
 
 @Repository("blogDAO")
+
+@Transactional
 public class BlogDAOImpl implements BlogDAO {
 
 	@Autowired
@@ -23,7 +26,7 @@ public class BlogDAOImpl implements BlogDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Transactional
+	
 	public boolean createBlog(Blog blog) {
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(blog);
@@ -41,50 +44,21 @@ public class BlogDAOImpl implements BlogDAO {
 		return blog;
 	}
 
-	public List<Blog> getBlogs() {
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("From Blog where status='A'");
-		List<Blog> listBlog = query.list();
-		session.close();
-		return listBlog;
+	public List<Blog> getBlogs(int approved) {
+		Session session = sessionFactory.getCurrentSession();
+		String queryStr="";
+		if(approved==1){
+			queryStr="from Blog where approved=" +approved;}
+		else{
+			queryStr="from Blog where rejectionReason is null and approved=" +approved;}
+		Query query = session.createQuery(queryStr);
+		
+		return query.list();
 	}
 
-	@Transactional
+	
 
-	public boolean approveBlog(Blog blog) {
-		try {
-			blog.setStatus("A");
-			sessionFactory.getCurrentSession().saveOrUpdate(blog);
-			return true;
-		} catch (Exception e) {
-			System.out.println("Exception Arised:" + e);
-		}
-		return false;
-	}
-
-	public boolean editBlog(int blogId) {
-		try {
-			Session session = sessionFactory.openSession();
-
-			Transaction tx = session.getTransaction();
-			tx.begin();
-			Blog blog = (Blog) session.get(Blog.class, blogId);
-
-			blog.setBlogName(blog.getBlogName());
-
-			blog.setBlogContent(blog.getBlogContent());
-			session.update(blog);
-
-			tx.commit();
-			session.close();
-
-			return true;
-		} catch (Exception e) {
-			System.out.println("Exception Arised:" + e);
-		}
-		return false;
-
-	}
+	
 
 	public boolean deleteBlog(int blogId) {
 		try {
@@ -98,6 +72,34 @@ public class BlogDAOImpl implements BlogDAO {
 			System.out.println("Exception Arised:" + e);
 		}
 		return false;
+	}
+
+
+	public void updateBlog(Blog blog) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(blog);
+	}
+
+
+	public void addBlogComment(BlogComment blogComment) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(blogComment);
+	}
+
+
+	public List<BlogComment> getBlogComments(int Id) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from BlogComment where blog.blogId="+Id);
+		return query.list();
+	}
+
+
+	public List<Blog> getNotification(String userId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Blog where postedBy.userId=? and viewed=? and(approved=1 or rejectionReason!=null)" );
+		query.setString(0,userId);
+		query.setBoolean(1,false);
+		return query.list();
 	}
 
 }

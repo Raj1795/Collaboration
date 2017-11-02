@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.trios.collaborate.model.Job;
 
 @Repository("jobDAO")
+@Transactional
 public class JobDAOImpl implements JobDAO {
 	
 	@Autowired
@@ -23,47 +24,28 @@ public class JobDAOImpl implements JobDAO {
 	}
 
 
-	@Transactional
-	public boolean createJob(Job job) {
-		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(job);
-			return true;
-		} catch (Exception e) {
-			System.out.println("Exception Arised:" + e);
-		}
-		return false;
+
+	public void createJob(Job job) {
+		Session session=sessionFactory.getCurrentSession();
+		session.save(job);
+		
 	}
 
 	public Job getJob(int jobId) {
-		Session session = sessionFactory.openSession();
+		Session session=sessionFactory.getCurrentSession();
 		Job job = (Job) session.get(Job.class, jobId);
-		session.close();
+		
 		return job;
 	}
 
 	public List<Job> getJobs() {
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("From Job where status='A'");
-		List<Job> listJob = query.list();
-		session.close();
-		return listJob;
+		Session session=sessionFactory.getCurrentSession();
+		Query query = session.createQuery("From Job");
+		
+		return query.list();
 	}
-	@Transactional
-	public boolean approveJob(Job job) {
-		try {
-			job.setStatus("A");
-			sessionFactory.getCurrentSession().saveOrUpdate(job);
-			return true;
-		} catch (Exception e) {
-			System.out.println("Exception Arised:" + e);
-		}
-		return false;
-	}
-
-	public boolean editJob(int jobId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
+	
 
 	public boolean deleteJob(int jobId) {
 		try {

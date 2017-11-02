@@ -9,13 +9,35 @@ import javax.persistence.*;
 public class Blog {
 
 	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
 	private int blogId;
 	
-	private String blogName,blogContent,status,userId;
+	private String blogName;
 	
-	private Date createDate;
+	@Lob
+	private String blogContent;
+	
+	private Date postedOn;
+	
+	@ManyToOne
+	private User postedBy;
+	
 	private int likes;
 	
+	private boolean approved;
+	
+	private String rejectionReason;
+	
+	private boolean viewed;
+
+	public boolean isViewed() {
+		return viewed;
+	}
+
+	public void setViewed(boolean viewed) {
+		this.viewed = viewed;
+	}
+
 	public int getBlogId() {
 		return blogId;
 	}
@@ -40,20 +62,20 @@ public class Blog {
 		this.blogContent = blogContent;
 	}
 
-	public String getStatus() {
-		return status;
+	public Date getPostedOn() {
+		return postedOn;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setPostedOn(Date postedOn) {
+		this.postedOn = postedOn;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public User getPostedBy() {
+		return postedBy;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setPostedBy(User postedBy) {
+		this.postedBy = postedBy;
 	}
 
 	public int getLikes() {
@@ -64,17 +86,22 @@ public class Blog {
 		this.likes = likes;
 	}
 
-
-
-	public String getUserId() {
-		return userId;
+	public boolean isApproved() {
+		return approved;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
 
-
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
+	
+	
 	
 }

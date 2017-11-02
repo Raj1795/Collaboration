@@ -9,7 +9,7 @@ public class User {
 	@Id
 	private String userId;
 	
-	private String firstName,lastName,password,role,status,isOnline;
+	private String firstName,lastName,password,role,isOnline;
 	
 	@Column(unique=true,nullable=false)
 	private String email;
@@ -51,12 +51,7 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	
 	public String getIsOnline() {
 		return isOnline;
 	}

@@ -9,20 +9,25 @@ import javax.persistence.*;
 public class Job {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int jobId;
-	private String jobProfile,jobDesc,qualification,status;
-	private Date postDate;
+	
+	private String jobName,jobDesc,skillsRequired,salary,location,companyName;
+	
+	private Date postedOn;
+	
+	
 	public int getJobId() {
 		return jobId;
 	}
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public String getJobProfile() {
-		return jobProfile;
+	public String getJobName() {
+		return jobName;
 	}
-	public void setJobProfile(String jobProfile) {
-		this.jobProfile = jobProfile;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 	public String getJobDesc() {
 		return jobDesc;
@@ -30,22 +35,37 @@ public class Job {
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
 	}
-	public String getQualification() {
-		return qualification;
+	public String getSkillsRequired() {
+		return skillsRequired;
 	}
-	public void setQualification(String qualification) {
-		this.qualification = qualification;
+	public void setSkillsRequired(String skillsRequired) {
+		this.skillsRequired = skillsRequired;
 	}
-	public String getStatus() {
-		return status;
+	public String getSalary() {
+		return salary;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setSalary(String salary) {
+		this.salary = salary;
 	}
-	public Date getPostDate() {
-		return postDate;
+	public String getLocation() {
+		return location;
 	}
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
+	public void setLocation(String location) {
+		this.location = location;
 	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public Date getPostedOn() {
+		return postedOn;
+	}
+	public void setPostedOn(Date postedOn) {
+		this.postedOn = postedOn;
+	}
+	
+	
+	
 }
